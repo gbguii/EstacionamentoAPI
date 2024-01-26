@@ -1,23 +1,70 @@
-﻿using EstacionamentoV2.Context;
+﻿using EstacionamentoV2.Business.DTO;
+using EstacionamentoV2.Business.Interface;
 using EstacionamentoV2.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace EstacionamentoV2;
+namespace EstacionamentoV2.Controller;
 [ApiController]
 [Route("[controller]")]
 public class PatioController: ControllerBase
 {
-    private readonly EstacionamentoContext _context;
-    public PatioController(EstacionamentoContext context)
+    private readonly IPatioBusiness _patioBusiness;
+    public PatioController(IPatioBusiness patioBusiness)
     {
-        _context = context;
+        _patioBusiness = patioBusiness;
     }
 
-    [HttpGet(Name = "GetPatio")]
-    public async Task<ActionResult<IEnumerable<PatioModel>>> Get()
+    [HttpGet("RecuperaPatios")]
+    public async Task<IActionResult> RecuperaVeiculo()
     {
-        return await _context.Patio.ToListAsync();
+        GenericResponse retorno = await _patioBusiness.RecuperaPatios();
+        return retorno.Success ? Ok(retorno.Data) : BadRequest(retorno.Message);
     }
 
+    [HttpGet("RecuperaPatio-PorId/{id}")]
+    public async Task<IActionResult> RecuperaVeiculoPorId(int id)
+    {
+        if (id <= 0)
+        {
+            return BadRequest("Id invalido!");
+        }
+        GenericResponse retorno = await _patioBusiness.RecuperaPatioPorId(id);
+        return retorno.Success ? Ok(retorno.Data) : BadRequest(retorno.Message);
+    }
+
+    [HttpPut("AtualizaPatio")]
+    public async Task<IActionResult> AtualizaVeiculo(AtualizarPatioDTO patio)
+    {
+        if (patio.PatioID <= 0 || patio.PatioNome == null || patio.PatioVagas <= 0)
+        {
+            return BadRequest("Dados invalidos!");
+        }
+
+        GenericResponse retorno = await _patioBusiness.AtualizaPatio(patio);
+        return retorno.Success ? Ok(retorno) : BadRequest(retorno.Message);
+    }
+
+    [HttpPost("AdicionaPatio")]
+    public async Task<IActionResult> AdicionaVeiculo(CadastrarPatioDTO patio)
+    {
+        if (patio.PatioNome == null || patio.PatioVagas <= 0)
+        {
+            return BadRequest("Dados invalidos!");
+        }
+
+        GenericResponse retorno = await _patioBusiness.CadastraPatio(patio);
+        return retorno.Success ? Ok(retorno.Message) : BadRequest(retorno.Message);
+    }
+
+    [HttpDelete("DeletaPatio/{id}")]
+    public async Task<IActionResult> DeletaVeiculo(int id)
+    {
+        if (id <= 0)
+        {
+            return BadRequest("Id invalido!");
+        }
+
+        GenericResponse retorno = await _patioBusiness.DeletaPatio(id);
+        return retorno.Success ? Ok(retorno.Message) : BadRequest(retorno.Message);
+    }
 }

@@ -11,6 +11,6 @@ public class EstacionamentoContext: DbContext
     }
 
     public DbSet<PatioModel> Patio { get; set; }
-    // public DbSet<VeiculoModel> Veiculo { get; set; }
-    // public DbSet<RegistroVeiculoModel> RegistroVeiculo { get; set; }
+    public DbSet<VeiculoModel> Veiculo { get; set; }
+    public DbSet<RegistroVeiculoModel> RegistroVeiculo { get; set; }
 }

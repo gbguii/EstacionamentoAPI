@@ -1,6 +1,10 @@
+using EstacionamentoV2;
+using EstacionamentoV2.Business;
+using EstacionamentoV2.Business.Interface;
 using EstacionamentoV2.Context;
+using EstacionamentoV2.Repository;
+using EstacionamentoV2.Repository.Interface;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +21,22 @@ var config = new ConfigurationBuilder()
 var conection = config.GetConnectionString("Default");
 builder.Services.AddDbContext<EstacionamentoContext>
     (options => options.UseMySql(conection, ServerVersion.AutoDetect(conection)));
+
+// Escoped
+builder.Services.AddScoped<PatioBusiness>();
+builder.Services.AddScoped<PatioRepository>();
+builder.Services.AddScoped<VeiculoBusiness>();
+builder.Services.AddScoped<VeiculoRepository>();
+builder.Services.AddScoped<RegistroVeiculoBusiness>();
+builder.Services.AddScoped<RegistroVeiculoRepository>();
+
+// Transiente
+builder.Services.AddTransient<IPatioBusiness, PatioBusiness>();
+builder.Services.AddTransient<IPatioRepository, PatioRepository>();
+builder.Services.AddTransient<IVeiculoBusiness, VeiculoBusiness>();
+builder.Services.AddTransient<IVeiculoRepository, VeiculoRepository>();
+builder.Services.AddTransient<IRegistroVeiculoBusiness, RegistroVeiculoBusiness>();
+builder.Services.AddTransient<IRegistroVeiculoRepository, RegistroVeiculoRepository>();
 
 var app = builder.Build();
 
