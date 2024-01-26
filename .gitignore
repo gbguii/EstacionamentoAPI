@@ -39,6 +39,10 @@ Thumbs.db
 *.app
 *.exe
 *.war
+*.exe
+*.pdb
+*.manifest
+*.cache
 
 # Large media files
 *.mp4
@@ -52,5 +56,7 @@ Thumbs.db
 .vs/
 
 #arquivos do sistema
-EstacionamentoV2/bin/
-EstacionamentoV2/obj/
+/EstacionamentoV2/bin/
+/EstacionamentoV2/obj/
+/EstacionamentoTest/bin/
+/EstacionamentoTest/obj/
