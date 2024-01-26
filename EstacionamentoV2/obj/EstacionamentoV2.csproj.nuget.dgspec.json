@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj": {}
+    "C:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj": {}
   },
   "projects": {
-    "c:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj": {
+    "C:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj",
+        "projectUniqueName": "C:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj",
         "projectName": "EstacionamentoV2",
-        "projectPath": "c:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj",
+        "projectPath": "C:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj",
         "packagesPath": "C:\\Users\\luizb\\.nuget\\packages\\",
-        "outputPath": "c:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\obj\\",
+        "outputPath": "C:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\luizb\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Iqwlg9IUS762IF3XV1BYOkWH/rWX0QPeaqxOg3B6RllxZmKU8o58Xk3+p81f0An0BzqXE+80VnGO1EYKY4RS0g==",
+  "dgSpecHash": "bMkGWngFAVFUD0QlthRAWcKL4oojjo8URFxBYnAwxGJK8e4Uy7UhvLrmNGto08oxIourW8DeQGsWrJhB2UbDOw==",
   "success": true,
-  "projectFilePath": "c:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj",
+  "projectFilePath": "C:\\projetos\\EstacionamentoV2\\EstacionamentoV2\\EstacionamentoV2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\luizb\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.11\\microsoft.aspnetcore.openapi.7.0.11.nupkg.sha512",
     "C:\\Users\\luizb\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.2\\microsoft.entityframeworkcore.7.0.2.nupkg.sha512",

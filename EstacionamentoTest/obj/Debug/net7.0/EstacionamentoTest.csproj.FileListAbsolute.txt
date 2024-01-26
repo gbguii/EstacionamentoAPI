@@ -97,3 +97,4 @@ c:\projetos\EstacionamentoV2\EstacionamentoTest\obj\Debug\net7.0\refint\Estacion
 c:\projetos\EstacionamentoV2\EstacionamentoTest\obj\Debug\net7.0\EstacionamentoTest.pdb
 c:\projetos\EstacionamentoV2\EstacionamentoTest\obj\Debug\net7.0\EstacionamentoTest.genruntimeconfig.cache
 c:\projetos\EstacionamentoV2\EstacionamentoTest\obj\Debug\net7.0\ref\EstacionamentoTest.dll
+c:\projetos\EstacionamentoV2\EstacionamentoTest\obj\Debug\net7.0\EstacionamentoTest.sourcelink.json
