@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstacionamentoV2", "EstacionamentoV2\EstacionamentoV2.csproj", "{F90AA6C2-666E-4CF7-B265-50C4E75C3E61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EstacionamentoTest", "EstacionamentoTest\EstacionamentoTest.csproj", "{21D6877D-0AA7-4F64-A3A3-B85B4A0E95C5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F90AA6C2-666E-4CF7-B265-50C4E75C3E61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F90AA6C2-666E-4CF7-B265-50C4E75C3E61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F90AA6C2-666E-4CF7-B265-50C4E75C3E61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F90AA6C2-666E-4CF7-B265-50C4E75C3E61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21D6877D-0AA7-4F64-A3A3-B85B4A0E95C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D6877D-0AA7-4F64-A3A3-B85B4A0E95C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D6877D-0AA7-4F64-A3A3-B85B4A0E95C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D6877D-0AA7-4F64-A3A3-B85B4A0E95C5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09219DC9-A9B7-482D-9B0C-5A167CE9ECF6}
+	EndGlobalSection
+EndGlobal
