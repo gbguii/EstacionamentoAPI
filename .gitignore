@@ -60,3 +60,6 @@ Thumbs.db
 /EstacionamentoV2/obj/
 /EstacionamentoTest/bin/
 /EstacionamentoTest/obj/
+/EstacionamentoTest/TestResults/
+/EstacionamentoTest/coverage_report
+/coverage_report/
