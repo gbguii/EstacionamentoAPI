@@ -99,6 +99,10 @@ public class RegistroVeiculoBusiness: IRegistroVeiculoBusiness
         {
            valorPagar = 0;
         }
+        else if(tempoEstacionado.TotalMinutes <= 5)
+        {
+            valorPagar = 0;
+        }
         else if(tempoEstacionado.TotalMinutes <= 30)
         {
             valorPagar = 5;
