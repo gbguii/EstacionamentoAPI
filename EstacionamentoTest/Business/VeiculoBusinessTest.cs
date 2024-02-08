@@ -55,7 +55,7 @@ public class VeiculoBusinessTest
     }
 
     [Fact]
-    public async void BuscaTodosVeiculos_SemSucesso_NenhumVeiculoEncontradoS()
+    public async void BuscaTodosVeiculos_SemSucesso_NenhumVeiculoEncontrado()
     {
         // Arrange
         _repositoryMock.Setup(x => x.BuscaTodosVeiculos()).ReturnsAsync(new List<VeiculoModel>());
@@ -227,6 +227,27 @@ public class VeiculoBusinessTest
         {
             VeiculoID = 1,
             Placa = "ABC123",
+            Modelo = "Fusca",
+            Tipo = "2",
+            Proprietario = "Branco"
+        };
+        GenericResponse retornoEsperado = new() { Success = false, Message = "Placa invalida", Data = null};
+
+        // Act
+        GenericResponse result = await _veiculoBusiness.AtualizaVeiculo(veiculo);
+
+        // Assert
+        Assert.Equivalent(retornoEsperado, result);
+    }
+
+    [Fact]
+    public async void AtualizaVeiculo_SemSucesso_PlacaMaiorQuantidade()
+    {
+        // Arrange
+        AtualizarVeiculoDTO veiculo = new()
+        {
+            VeiculoID = 1,
+            Placa = "ABC12345",
             Modelo = "Fusca",
             Tipo = "2",
             Proprietario = "Branco"
