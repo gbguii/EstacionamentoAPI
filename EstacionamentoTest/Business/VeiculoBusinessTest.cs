@@ -41,7 +41,7 @@ public class VeiculoBusinessTest
     };
 
     [Fact]
-    public async void BuscaTodosVeiculos_DeveRetornarListaDeVeiculos()
+    public async void BuscaTodosVeiculos_ComSucesso_DeveRetornarListaDeVeiculos()
     {
         // Arrange
         _repositoryMock.Setup(x => x.BuscaTodosVeiculos()).ReturnsAsync(veiculos);
@@ -87,7 +87,7 @@ public class VeiculoBusinessTest
     [Theory]
     [InlineData(3)]
     [InlineData(4)]
-    public async void BuscaVeiculoPorId_SemSucesso(int id)
+    public async void BuscaVeiculoPorId_SemSucesso_VeiculoNaoEncontrado(int id)
     {
         // Arrange
         _repositoryMock.Setup(x => x.BuscaVeiculoPorId(id)).ReturnsAsync((VeiculoModel)null);
@@ -119,7 +119,7 @@ public class VeiculoBusinessTest
     [Theory]
     [InlineData("GHI9012")]
     [InlineData("JKL3456")]
-    public async void BuscaVeiculoPorPlaca_SemSucesso(string placa)
+    public async void BuscaVeiculoPorPlaca_SemSucesso_VeiculoNaoEncontrado(string placa)
     {
         // Arrange
         _repositoryMock.Setup(x => x.BuscaVeiculoPorPlaca(placa)).ReturnsAsync((VeiculoModel)null);
@@ -325,7 +325,7 @@ public class VeiculoBusinessTest
     [Theory]
     [InlineData(3)]
     [InlineData(4)]
-    public async void DeletaVeiculo_SemSucesso(int id)
+    public async void DeletaVeiculo_SemSucesso_VeiculoNaoEncontrado(int id)
     {
         // Arrange
         _repositoryMock.Setup(x => x.BuscaVeiculoPorId(id)).ReturnsAsync((VeiculoModel)null);
@@ -333,20 +333,6 @@ public class VeiculoBusinessTest
 
         // Act
         GenericResponse result = await _veiculoBusiness.DeletaVeiculoPorId(id);
-
-        // Assert
-        Assert.Equivalent(retornoEsperado, result);
-    }
-
-    [Fact]
-    public async void DeletaVeiculo_SemSucesso_VeiculoNaoEncontrado()
-    {
-        // Arrange
-        _repositoryMock.Setup(x => x.BuscaVeiculoPorId(3)).ReturnsAsync((VeiculoModel)null);
-        GenericResponse retornoEsperado = new() { Success = false, Message = "Veiculo não encontrado", Data = null};
-
-        // Act
-        GenericResponse result = await _veiculoBusiness.DeletaVeiculoPorId(3);
 
         // Assert
         Assert.Equivalent(retornoEsperado, result);

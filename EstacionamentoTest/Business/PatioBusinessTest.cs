@@ -50,7 +50,7 @@ public class PatioBusinessTest
     }
 
     [Fact]
-    public async void RecuperaTodosPatios_SemSucesso()
+    public async void RecuperaTodosPatios_SemSucesso_NenhumPatioCadastrado()
     {
         // Arrange
         _repositoryMock.Setup(x => x.RecuperaPatios()).Returns(Task.FromResult(new List<PatioModel>()));
@@ -87,7 +87,7 @@ public class PatioBusinessTest
     }
 
     [Fact]
-    public async void RecuperaPatioPorId_SemSuceso()
+    public async void RecuperaPatioPorId_SemSuceso_PatioNaoEncontrado()
     {
         // Arrange
         _repositoryMock.Setup(x => x.RecuperaPatioPorId(2)).Returns(Task.FromResult<PatioModel>(null));
