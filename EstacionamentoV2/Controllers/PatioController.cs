@@ -15,14 +15,14 @@ public class PatioController: ControllerBase
     }
 
     [HttpGet("RecuperaPatios")]
-    public async Task<IActionResult> RecuperaVeiculo()
+    public async Task<IActionResult> RecuperaPatios()
     {
         GenericResponse retorno = await _patioBusiness.RecuperaPatios();
         return retorno.Success ? Ok(retorno.Data) : BadRequest(retorno.Message);
     }
 
     [HttpGet("RecuperaPatio-PorId/{id}")]
-    public async Task<IActionResult> RecuperaVeiculoPorId(int id)
+    public async Task<IActionResult> RecuperaPatioPorId(int id)
     {
         if (id <= 0)
         {
@@ -33,7 +33,7 @@ public class PatioController: ControllerBase
     }
 
     [HttpPut("AtualizaPatio")]
-    public async Task<IActionResult> AtualizaVeiculo(AtualizarPatioDTO patio)
+    public async Task<IActionResult> AtualizaPatio(AtualizarPatioDTO patio)
     {
         if (patio.PatioID <= 0 || patio.PatioNome == null || patio.PatioVagas <= 0)
         {
@@ -45,7 +45,7 @@ public class PatioController: ControllerBase
     }
 
     [HttpPost("AdicionaPatio")]
-    public async Task<IActionResult> AdicionaVeiculo(CadastrarPatioDTO patio)
+    public async Task<IActionResult> AdicionaPatio(CadastrarPatioDTO patio)
     {
         if (patio.PatioNome == null || patio.PatioVagas <= 0)
         {
@@ -57,7 +57,7 @@ public class PatioController: ControllerBase
     }
 
     [HttpDelete("DeletaPatio/{id}")]
-    public async Task<IActionResult> DeletaVeiculo(int id)
+    public async Task<IActionResult> DeletaPatio(int id)
     {
         if (id <= 0)
         {

@@ -8,7 +8,7 @@ public class Validacoes
     {
         if (string.IsNullOrWhiteSpace(placa)) { return false; }
 
-        if (placa.Length > 8) { return false; }
+        if (placa.Length > 7) { return false; }
 
         placa = placa.Replace("-", "").Trim();
 

@@ -10,7 +10,8 @@ for /d /r %%i in (*) do (
         echo Excluída a pasta TestResults em: %%i
     )
 )
-
+dotnet clean
+dotnet build
 dotnet test --collect:"XPlat Code Coverage"
 
 reportgenerator -reports:./**/coverage.cobertura.xml -targetdir:coverage_report -filefilters:-**Moq** -assemblyFilters:-*.Tests

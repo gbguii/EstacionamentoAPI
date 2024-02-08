@@ -203,6 +203,21 @@ public class RegistroVeiculoBusinessTest
         Assert.Equivalent(retornoEsperado, retorno);
     }
 
+    public async void RegistrarSaidaVeiculo_PlacaMaiorQuantidae()
+    {
+        // Arrange
+        RegistrarSaidaVeiculoDTO veiculo = new()
+        {
+            Placa = "ABC12345",
+            Ticket = 1
+        };
+        GenericResponse retornoEsperado = new() { Success = false, Message = "Placa inválida" };
+        // Act
+        GenericResponse retorno = await _registroVeiculoBusiness.RegistrarSaidaVeiculo(veiculo);
+        // Assert
+        Assert.Equivalent(retornoEsperado, retorno);
+    }
+
     [Fact]
     public async void RegistrarSaidaVeiculo_VeiculoNaoEncontrado()
     {
@@ -216,7 +231,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_PlacaInvalida()
+    public async void RegistrarSaidaVeiculo_PlacaFormatoInvalido()
     {
         // Arrange
         RegistrarSaidaVeiculoDTO veiculo = new()
