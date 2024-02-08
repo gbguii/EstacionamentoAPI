@@ -67,7 +67,7 @@ public class RegistroVeiculoBusinessTest
     };
 
     [Fact]
-    public async void ConsultarVeiculoEstacionado_ComSucesso()
+    public async void ConsultarVeiculosEstacionados_ComSucesso()
     {
         // Arrange
         _repositoryMock.Setup(x => x.ConsultarVeiculosEstacionados()).ReturnsAsync(VeiculosEstacionado);
@@ -79,7 +79,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void ConsultarVeiculoEstacionado_SemVeiculosEstacionados()
+    public async void ConsultarVeiculosEstacionados_SemSucesso_SemVeiculosEstacionados()
     {
         // Arrange
         _repositoryMock.Setup(x => x.ConsultarVeiculosEstacionados()).ReturnsAsync(new List<RegistroVeiculoModel>());
@@ -112,7 +112,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarEntradaVeiculo_PatioInvalido()
+    public async void RegistrarEntradaVeiculo_SemSucesso_PatioInvalido()
     {
         // Arrange
         _patioRepositoryMock.Setup(x => x.RecuperaPatioPorId(RegistroVeiculoDto.PatioId)).ReturnsAsync((PatioModel)null);
@@ -124,7 +124,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarEntradaVeiculo_PlacaInvalida()
+    public async void RegistrarEntradaVeiculo_SemSucesso_PlacaInvalida()
     {
         // Arrange
         RegistrarEntradaVeiculoDTO veiculo = new()
@@ -173,7 +173,7 @@ public class RegistroVeiculoBusinessTest
     
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_PlacaVazia()
+    public async void RegistrarSaidaVeiculo_SemSucesso_PlacaVazia()
     {
         // Arrange
         RegistrarSaidaVeiculoDTO veiculo = new()
@@ -188,7 +188,8 @@ public class RegistroVeiculoBusinessTest
         Assert.Equivalent(retornoEsperado, retorno);
     }
 
-    public async void RegistrarSaidaVeiculo_PlacaMenorQuantidae()
+    [Fact]
+    public async void RegistrarSaidaVeiculo_SemSucesso_PlacaMenorQuantidae()
     {
         // Arrange
         RegistrarSaidaVeiculoDTO veiculo = new()
@@ -203,7 +204,8 @@ public class RegistroVeiculoBusinessTest
         Assert.Equivalent(retornoEsperado, retorno);
     }
 
-    public async void RegistrarSaidaVeiculo_PlacaMaiorQuantidae()
+    [Fact]
+    public async void RegistrarSaidaVeiculo_SemSucesso_PlacaMaiorQuantidae()
     {
         // Arrange
         RegistrarSaidaVeiculoDTO veiculo = new()
@@ -219,7 +221,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_VeiculoNaoEncontrado()
+    public async void RegistrarSaidaVeiculo_SemSucesso_VeiculoNaoEncontrado()
     {
         // Arrange
         _repositoryMock.Setup(x => x.ConsultarVeiculoEstacionado(RegistroVeiculoDto.Placa)).ReturnsAsync((RegistroVeiculoModel)null);
@@ -231,7 +233,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_PlacaFormatoInvalido()
+    public async void RegistrarSaidaVeiculo_SemSucesso_PlacaFormatoInvalido()
     {
         // Arrange
         RegistrarSaidaVeiculoDTO veiculo = new()
@@ -247,7 +249,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_VeiculoJaLiberado()
+    public async void RegistrarSaidaVeiculo_SemSucesso_VeiculoJaLiberado()
     {
         // Arrange
         RegistroVeiculoModel veiculo = VeiculosEstacionado[0];
@@ -261,7 +263,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_VeiculoMensalista()
+    public async void RegistrarSaidaVeiculo_ComSucesso_VeiculoMensalista()
     {
         // Arrange
         RegistroVeiculoModel veiculo = VeiculosEstacionado[0];
@@ -275,7 +277,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_1HoraPermanencia()
+    public async void RegistrarSaidaVeiculo_ComSucesso_1HoraPermanencia()
     {
         // Arrange
         RegistroVeiculoModel veiculo = VeiculosEstacionado[0];
@@ -289,7 +291,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_2HoraPermanencia()
+    public async void RegistrarSaidaVeiculo_ComSucesso_2HoraPermanencia()
     {
         // Arrange
         RegistroVeiculoModel veiculo = VeiculosEstacionado[0];
@@ -303,7 +305,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_3a6HorasPermanencia()
+    public async void RegistrarSaidaVeiculo_ComSucesso_3a6HorasPermanencia()
     {
         // Arrange
         RegistroVeiculoModel veiculo = VeiculosEstacionado[0];
@@ -317,7 +319,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_7a14HorasPermanencia()
+    public async void RegistrarSaidaVeiculo_ComSucesso_7a14HorasPermanencia()
     {
         // Arrange
         RegistroVeiculoModel veiculo = VeiculosEstacionado[0];
@@ -331,7 +333,7 @@ public class RegistroVeiculoBusinessTest
     }
 
     [Fact]
-    public async void RegistrarSaidaVeiculo_Mais14horasPermanencia()
+    public async void RegistrarSaidaVeiculo_ComSucesso_Mais14horasPermanencia()
     {
         // Arrange
         RegistroVeiculoModel veiculo = VeiculosEstacionado[0];
@@ -348,20 +350,4 @@ public class RegistroVeiculoBusinessTest
         // Assert
         Assert.Equivalent(retornoEsperado, retorno);
     }
-
-    [Fact]
-    public async void RegistrarSaidaVeiculo_JaLiberado()
-    {
-        // Arrange
-        RegistroVeiculoModel veiculo = VeiculosEstacionado[0];
-        veiculo.DataSaida = DateTime.Now;
-        _repositoryMock.Setup(x => x.ConsultarVeiculoEstacionado(RegistroVeiculoDto.Placa)).ReturnsAsync(veiculo);
-        GenericResponse retornoEsperado = new() { Success = false, Message = "Veículo já liberado" };
-        // Act
-        GenericResponse retorno = await _registroVeiculoBusiness.RegistrarSaidaVeiculo(RegistroSaidaVeiculo);
-        // Assert
-        Assert.Equivalent(retornoEsperado, retorno);
-    }
-
-
 }

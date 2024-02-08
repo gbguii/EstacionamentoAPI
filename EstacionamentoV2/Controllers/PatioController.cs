@@ -41,7 +41,7 @@ public class PatioController: ControllerBase
         }
 
         GenericResponse retorno = await _patioBusiness.AtualizaPatio(patio);
-        return retorno.Success ? Ok(retorno) : BadRequest(retorno.Message);
+        return retorno.Success ? Ok(retorno.Message) : BadRequest(retorno.Message);
     }
 
     [HttpPost("AdicionaPatio")]
