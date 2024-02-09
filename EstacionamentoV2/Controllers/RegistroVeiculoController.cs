@@ -24,22 +24,38 @@ public class RegistroVeiculoController: ControllerBase
     [HttpPost("RegistrarEntradaVeiculo")]
     public async Task<IActionResult> RegistrarEntradaVeiculo([FromBody] RegistrarEntradaVeiculoDTO veiculo)
     {
-        GenericResponse response = await _registroVeiculoBusiness.RegistrarEntradaVeiculo(veiculo);
-        if(response.Success)
+        if(veiculo.Placa == null)
         {
-            return Ok(response.Message);
+            return BadRequest("Placa Inválida!");
         }
-        return BadRequest(response.Message);
+        if(veiculo.Modelo == null)
+        {
+            return BadRequest("Modelo Inválido!");
+        }
+        if(veiculo.PatioId == 0 || veiculo.PatioId <= 0)
+        {
+            return BadRequest("Patio Inválido!");
+        }
+
+        GenericResponse response = await _registroVeiculoBusiness.RegistrarEntradaVeiculo(veiculo);
+
+        return response.Success ? Ok(response.Message) : BadRequest(response.Message);
     }
 
     [HttpPost("RegistrarSaidaVeiculo")]
     public async Task<IActionResult> RegistrarSaidaVeiculo([FromBody] RegistrarSaidaVeiculoDTO veiculo)
     {
-        GenericResponse response = await _registroVeiculoBusiness.RegistrarSaidaVeiculo(veiculo);
-        if(response.Success)
+        if(veiculo.Placa == null)
         {
-            return Ok(response.Message);
+            return BadRequest("Placa Inválida!");
         }
-        return BadRequest(response.Message);
+        if(veiculo.Ticket == 0)
+        {
+            return BadRequest("Ticket Inválido!");
+        }
+
+        GenericResponse response = await _registroVeiculoBusiness.RegistrarSaidaVeiculo(veiculo);
+
+        return response.Success ? Ok(response.Message) : BadRequest(response.Message);
     }
 }
