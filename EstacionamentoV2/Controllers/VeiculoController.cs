@@ -49,7 +49,7 @@ public class VeiculoController: ControllerBase
             return BadRequest("Corpo da requisição invalido");
         }
 
-        if (veiculo.Placa.Length > 8)
+        if (veiculo.Placa.Length > 7)
         {
             return BadRequest("Placa invalida");
         }
@@ -57,7 +57,7 @@ public class VeiculoController: ControllerBase
         {
             return BadRequest("Modelo invalido");
         }
-        if (string.IsNullOrEmpty(veiculo.Tipo.ToString()))
+        if (string.IsNullOrEmpty(veiculo.Tipo.ToString()) || char.MinValue == veiculo.Tipo)
         {
             return BadRequest("Tipo invalido");
         }
@@ -77,7 +77,7 @@ public class VeiculoController: ControllerBase
         {
             return BadRequest("Id invalido");
         }
-        if (veiculo.Placa.Length > 8)
+        if (veiculo.Placa.Length > 7)
         {
             return BadRequest("Placa invalida");
         }
@@ -85,7 +85,7 @@ public class VeiculoController: ControllerBase
         {
             return BadRequest("Modelo invalido");
         }
-        if (string.IsNullOrEmpty(veiculo.Tipo.ToString()))
+        if (string.IsNullOrEmpty(veiculo.Tipo))
         {
             return BadRequest("Tipo invalido");
         }
