@@ -1,10 +1,13 @@
+using System.Text;
 using EstacionamentoV2;
 using EstacionamentoV2.Business;
 using EstacionamentoV2.Business.Interface;
 using EstacionamentoV2.Context;
 using EstacionamentoV2.Repository;
 using EstacionamentoV2.Repository.Interface;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +40,22 @@ builder.Services.AddTransient<IVeiculoBusiness, VeiculoBusiness>();
 builder.Services.AddTransient<IVeiculoRepository, VeiculoRepository>();
 builder.Services.AddTransient<IRegistroVeiculoBusiness, RegistroVeiculoBusiness>();
 builder.Services.AddTransient<IRegistroVeiculoRepository, RegistroVeiculoRepository>();
+
+builder.Services.AddAuthentication(x => {
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x => {
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key.Secret)),
+        ValidateIssuer = false,
+        ValidateAudience = false
+    };
+});
+
 
 var app = builder.Build();
 
