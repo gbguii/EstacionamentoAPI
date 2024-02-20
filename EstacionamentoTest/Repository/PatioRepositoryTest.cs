@@ -13,6 +13,7 @@ public class PatioRepositoryTest
     {
         _context = GeradorContextoEmMemoria.GerarContexto();
         _repository = new PatioRepository(_context);
+         AdicionaPatio();
     }
 
     private async void AdicionaPatio()
@@ -30,9 +31,6 @@ public class PatioRepositoryTest
     [Fact]
     public async void BuscaTodosPatios_ComSucesso()
     {
-        // Arrange
-        AdicionaPatio();
-
         // Act
         List<PatioModel> patios = await _repository.RecuperaPatios();
 
@@ -43,8 +41,6 @@ public class PatioRepositoryTest
     [Fact]
     public async void BuscaPatioPorId_ComSucesso()
     {
-        // Arrange
-        AdicionaPatio();
 
         // Act
         PatioModel patio = await _repository.RecuperaPatioPorId(1);
@@ -56,8 +52,6 @@ public class PatioRepositoryTest
     [Fact]
     public async void AtualizaPatio_ComSucesso()
     {
-        // Arrange
-        AdicionaPatio();
         PatioModel patio = await _repository.RecuperaPatioPorId(1);
         patio.PatioNome = "Patio 2";
 
@@ -75,13 +69,14 @@ public class PatioRepositoryTest
         // Arrange
         var patio = new PatioModel
         {
+            PatioID = 10,
             PatioNome = "Patio 1",
             PatioVagas = 10,
         };
 
         // Act
         await _repository.CadastraPatio(patio);
-        PatioModel patioCadastrado = await _repository.RecuperaPatioPorId(1);
+        PatioModel patioCadastrado = await _repository.RecuperaPatioPorId(10);
 
         // Assert
         Assert.Equal("Patio 1", patioCadastrado.PatioNome);
