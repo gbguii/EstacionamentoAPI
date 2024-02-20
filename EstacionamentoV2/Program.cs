@@ -23,7 +23,7 @@ var config = new ConfigurationBuilder()
         .Build();
 var conection = config.GetConnectionString("Default");
 builder.Services.AddDbContext<EstacionamentoContext>
-    (options => options.UseMySql(conection, ServerVersion.AutoDetect(conection)));
+    (options => options.UseNpgsql(conection));
 
 // Escoped
 builder.Services.AddScoped<PatioBusiness>();
