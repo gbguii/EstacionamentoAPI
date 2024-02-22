@@ -32,6 +32,9 @@ builder.Services.AddScoped<VeiculoBusiness>();
 builder.Services.AddScoped<VeiculoRepository>();
 builder.Services.AddScoped<RegistroVeiculoBusiness>();
 builder.Services.AddScoped<RegistroVeiculoRepository>();
+builder.Services.AddScoped<UsuarioRepository>();
+builder.Services.AddScoped<UsuarioBusiness>();
+builder.Services.AddScoped<TokenBusiness>();
 
 // Transiente
 builder.Services.AddTransient<IPatioBusiness, PatioBusiness>();
@@ -40,6 +43,10 @@ builder.Services.AddTransient<IVeiculoBusiness, VeiculoBusiness>();
 builder.Services.AddTransient<IVeiculoRepository, VeiculoRepository>();
 builder.Services.AddTransient<IRegistroVeiculoBusiness, RegistroVeiculoBusiness>();
 builder.Services.AddTransient<IRegistroVeiculoRepository, RegistroVeiculoRepository>();
+builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddTransient<ITokenBusiness, TokenBusiness>();
+
+var keyS = Encoding.ASCII.GetBytes(Key.Secret);
 
 builder.Services.AddAuthentication(x => {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -50,7 +57,7 @@ builder.Services.AddAuthentication(x => {
     x.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key.Secret)),
+        IssuerSigningKey = new SymmetricSecurityKey(keyS),
         ValidateIssuer = false,
         ValidateAudience = false
     };

@@ -1,6 +1,7 @@
 ﻿using EstacionamentoV2.Business.DTO;
 using EstacionamentoV2.Business.Interface;
 using EstacionamentoV2.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstacionamentoV2.Controller;
@@ -14,6 +15,7 @@ public class PatioController: ControllerBase
         _patioBusiness = patioBusiness;
     }
 
+    [Authorize]
     [HttpGet("RecuperaPatios")]
     public async Task<IActionResult> RecuperaPatios()
     {
@@ -21,6 +23,7 @@ public class PatioController: ControllerBase
         return retorno.Success ? Ok(retorno.Data) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpGet("RecuperaPatio-PorId/{id}")]
     public async Task<IActionResult> RecuperaPatioPorId(int id)
     {
@@ -32,6 +35,7 @@ public class PatioController: ControllerBase
         return retorno.Success ? Ok(retorno.Data) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpPut("AtualizaPatio")]
     public async Task<IActionResult> AtualizaPatio(AtualizarPatioDTO patio)
     {
@@ -44,6 +48,7 @@ public class PatioController: ControllerBase
         return retorno.Success ? Ok(retorno.Message) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpPost("AdicionaPatio")]
     public async Task<IActionResult> AdicionaPatio(CadastrarPatioDTO patio)
     {
@@ -56,6 +61,7 @@ public class PatioController: ControllerBase
         return retorno.Success ? Ok(retorno.Message) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpDelete("DeletaPatio/{id}")]
     public async Task<IActionResult> DeletaPatio(int id)
     {

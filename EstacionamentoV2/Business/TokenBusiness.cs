@@ -2,13 +2,14 @@
 using System.Security.Claims;
 using System.Text;
 using EstacionamentoV2.Business.DTO;
+using EstacionamentoV2.Business.Interface;
 using EstacionamentoV2.Model;
 using EstacionamentoV2.Repository.Interface;
 using Microsoft.IdentityModel.Tokens;
 
 namespace EstacionamentoV2.Business;
 
-public class TokenBusiness
+public class TokenBusiness: ITokenBusiness
 {
     private readonly IUsuarioRepository _usuarioRepository;
     public TokenBusiness(IUsuarioRepository usuarioRepository)

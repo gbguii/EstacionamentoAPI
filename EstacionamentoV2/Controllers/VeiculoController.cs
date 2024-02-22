@@ -1,6 +1,7 @@
 ﻿using EstacionamentoV2.Business.DTO;
 using EstacionamentoV2.Business.Interface;
 using EstacionamentoV2.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstacionamentoV2.Controller;
@@ -13,6 +14,7 @@ public class VeiculoController: ControllerBase
         _veiculoBusiness = veiculoBusiness;
     }
 
+    [Authorize]
     [HttpGet("BuscaTodosVeiculos")]
     public async Task<IActionResult> BuscaTodosVeiculo()
     {
@@ -20,6 +22,7 @@ public class VeiculoController: ControllerBase
         return retorno.Success ? Ok(retorno.Data) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpGet("BuscaVeiculoPorId/{id}")]
     public async Task<IActionResult> BuscaVeiculoPorId(int id)
     {
@@ -30,6 +33,8 @@ public class VeiculoController: ControllerBase
         GenericResponse retorno = await _veiculoBusiness.BuscaVeiculoPorId(id);
         return retorno.Success ? Ok(retorno.Data) : BadRequest(retorno.Message);
     }
+
+    [Authorize]
     [HttpGet("BuscaVeiculoPorPlaca/{placa}")]
     public async Task<IActionResult> BuscaVeiculoPorPlaca(string placa)
     {
@@ -41,6 +46,7 @@ public class VeiculoController: ControllerBase
         return retorno.Success ? Ok(retorno.Data) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpPost("CadastrarVeiculo")]
     public async Task<IActionResult> CadastrarVeiculo([FromBody] CadastrarVeiculoDTO veiculo)
     {
@@ -65,6 +71,7 @@ public class VeiculoController: ControllerBase
         return retorno.Success ? Ok(retorno.Message) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpPut("AtualizarVeiculo")]
     public async Task<IActionResult> AtualizarVeiculo([FromBody] AtualizarVeiculoDTO veiculo)
     {
@@ -93,6 +100,7 @@ public class VeiculoController: ControllerBase
         return retorno.Success ? Ok(retorno.Message) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpDelete("DeletarVeiculo/{id}")]
     public async Task<IActionResult> DeletarVeiculo(int id)
     {
@@ -104,6 +112,7 @@ public class VeiculoController: ControllerBase
         return retorno.Success ? Ok(retorno.Message) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpDelete("DeletarVeiculoPorPlaca/{placa}")]
     public async Task<IActionResult> DeletarVeiculoPorPlaca(string placa)
     {
