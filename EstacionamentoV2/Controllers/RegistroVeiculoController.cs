@@ -1,6 +1,7 @@
 ﻿using EstacionamentoV2.Business.DTO;
 using EstacionamentoV2.Business.Interface;
 using EstacionamentoV2.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EstacionamentoV2.Controller;
@@ -13,7 +14,7 @@ public class RegistroVeiculoController: ControllerBase
         _registroVeiculoBusiness = registroVeiculoBusiness;
     }
 
-    
+    [Authorize]
     [HttpGet("ConsultarVeiculosEstacionados")]
     public async Task<IActionResult> ConsultarVeiculoEstacionado()
     {
@@ -21,6 +22,7 @@ public class RegistroVeiculoController: ControllerBase
         return retorno.Success ? Ok(retorno.Data) : BadRequest(retorno.Message);
     }
 
+    [Authorize]
     [HttpPost("RegistrarEntradaVeiculo")]
     public async Task<IActionResult> RegistrarEntradaVeiculo([FromBody] RegistrarEntradaVeiculoDTO veiculo)
     {
@@ -42,6 +44,7 @@ public class RegistroVeiculoController: ControllerBase
         return response.Success ? Ok(response.Message) : BadRequest(response.Message);
     }
 
+    [Authorize]
     [HttpPost("RegistrarSaidaVeiculo")]
     public async Task<IActionResult> RegistrarSaidaVeiculo([FromBody] RegistrarSaidaVeiculoDTO veiculo)
     {

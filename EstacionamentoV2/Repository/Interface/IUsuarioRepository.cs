@@ -6,5 +6,5 @@ public interface IUsuarioRepository
 {
     public Task<UsuarioModel> RetornaUsuario(string login, string senha);
     public Task<UsuarioModel> RetornaUsuarioPorLogin(string login);
-    public Task CriaUsuario(string login, string senha);
+    public Task CriaUsuario(UsuarioModel usuario);
 }
