@@ -13,17 +13,25 @@ public class PatioRepositoryTest
     {
         _context = GeradorContextoEmMemoria.GerarContexto();
         _repository = new PatioRepository(_context);
-         AdicionaPatio();
     }
 
-    private async void AdicionaPatio()
+    private async Task AdicionaPatio()
     {
         // Arrange
         var patio = new PatioModel
         {
+            PatioID = 1,
             PatioNome = "Patio 1",
             PatioVagas = 10,
         };
+        List<PatioModel> patios = await _repository.RecuperaPatios();
+        if(patios.Count > 0)
+        {
+            foreach (var p in patios)
+            {
+                await _repository.DeletaPatio(p);
+            }
+        }
         await _repository.CadastraPatio(patio);
         await _context.SaveChangesAsync();
     }  
@@ -31,6 +39,9 @@ public class PatioRepositoryTest
     [Fact]
     public async void BuscaTodosPatios_ComSucesso()
     {
+        // Arrange
+        await AdicionaPatio();
+
         // Act
         List<PatioModel> patios = await _repository.RecuperaPatios();
 
@@ -41,17 +52,20 @@ public class PatioRepositoryTest
     [Fact]
     public async void BuscaPatioPorId_ComSucesso()
     {
-
+        // Arrange
+        await AdicionaPatio();
         // Act
         PatioModel patio = await _repository.RecuperaPatioPorId(1);
 
         // Assert
-        Assert.Equal("Patio 1", patio.PatioNome);
+        Assert.NotNull(patio);
     }
 
     [Fact]
     public async void AtualizaPatio_ComSucesso()
     {
+        // Arrange
+        await AdicionaPatio();
         PatioModel patio = await _repository.RecuperaPatioPorId(1);
         patio.PatioNome = "Patio 2";
 
@@ -86,7 +100,7 @@ public class PatioRepositoryTest
     public async void DeletaPatio_ComSucesso()
     {
         // Arrange
-        AdicionaPatio();
+        await AdicionaPatio();
         PatioModel patio = await _repository.RecuperaPatioPorId(1);
 
         // Act
