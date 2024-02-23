@@ -4,7 +4,7 @@ using EstacionamentoV2.Model;
 using EstacionamentoV2.Repository.Interface;
 using Moq;
 
-namespace EstacionamentoTest;
+namespace EstacionamentoTest.Repository;
 
 public class UsuarioBusinessTest
 {

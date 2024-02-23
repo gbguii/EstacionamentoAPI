@@ -3,7 +3,6 @@ using EstacionamentoV2.Business.Interface;
 using EstacionamentoV2.Controller;
 using EstacionamentoV2.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 using Moq;
 
 namespace EstacionamentoTest.Controllers;
@@ -37,7 +36,7 @@ public class TokenControllerTest
         Assert.Multiple(() =>
         {
             OkObjectResult okResult = Assert.IsType<OkObjectResult>(retorno);
-            Assert.IsType<PatioModel>(okResult.Value);
+            Assert.IsType<String>(okResult.Value);
             Assert.Equal(retornoEsperado.Data, okResult.Value);
             Assert.Equal(200, okResult.StatusCode);
         });
@@ -61,7 +60,7 @@ public class TokenControllerTest
         Assert.Multiple(() =>
         {
             BadRequestObjectResult badRequestResult = Assert.IsType<BadRequestObjectResult>(retorno);
-            Assert.IsType<PatioModel>(badRequestResult.Value);
+            Assert.IsType<String>(badRequestResult.Value);
             Assert.Equal(retornoEsperado.Message, badRequestResult.Value);
             Assert.Equal(400, badRequestResult.StatusCode);
         });

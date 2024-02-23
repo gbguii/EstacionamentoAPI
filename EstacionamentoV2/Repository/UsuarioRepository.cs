@@ -16,6 +16,7 @@ public class UsuarioRepository : IUsuarioRepository
     public async Task CriaUsuario(UsuarioModel usuario)
     {
         await _context.Usuario.AddAsync(usuario);
+        await _context.SaveChangesAsync();
     }
 
     public async Task<UsuarioModel> RetornaUsuario(string login, string senha)
