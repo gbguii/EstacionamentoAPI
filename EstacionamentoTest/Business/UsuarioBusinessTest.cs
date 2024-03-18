@@ -2,9 +2,10 @@
 using EstacionamentoV2.Business.DTO;
 using EstacionamentoV2.Model;
 using EstacionamentoV2.Repository.Interface;
+using Microsoft.OpenApi.Any;
 using Moq;
 
-namespace EstacionamentoTest.Repository;
+namespace EstacionamentoTest.Business;
 
 public class UsuarioBusinessTest
 {
@@ -17,26 +18,28 @@ public class UsuarioBusinessTest
         _usuarioBusiness = new UsuarioBusiness(_repositoryMock.Object);
     }
 
-    private readonly UsuarioModel usuarioModel = new() 
-    {   Id = 1, 
-        Login = "teste", 
-        Senha = "teste", 
-        Acesso = "teste", 
-        DataCriacao = DateTime.Now, 
-        DataAlteracao = DateTime.Now, 
-        Ativo = true 
+    private readonly UsuarioModel usuarioModel = new()
+    {
+        Id = 1,
+        Login = "teste",
+        Senha = "teste",
+        Acesso = "teste",
+        DataCriacao = DateTime.Now,
+        DataAlteracao = DateTime.Now,
+        Ativo = true
     };
-    private readonly RegistrarUsuarioDTO usuarioDTO = new() 
-    {   Login = "teste", 
-        Senha = "teste", 
-        Acesso = "teste" 
+    private readonly RegistrarUsuarioDTO usuarioDTO = new()
+    {
+        Login = "teste",
+        Senha = "teste",
+        Acesso = "teste"
     };
 
     [Fact]
     public async void RetornaUsuario_ComSucesso()
     {
         // Arrange
-        _repositoryMock.Setup(x => x.RetornaUsuario("teste", "teste")).ReturnsAsync(usuarioModel);
+        _repositoryMock.Setup(x => x.RetornaUsuario(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(usuarioModel);
         GenericResponse retornoEsperado = new() { Success = true, Message = "Usuário retornado com sucesso.", Data = usuarioModel };
 
         // Act

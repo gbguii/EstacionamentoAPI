@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EstacionamentoV2.Controller;
 
-public class UsuarioController: ControllerBase
+public class UsuarioController : ControllerBase
 {
     private readonly IUsuarioBusiness _usuarioBusiness;
 
@@ -16,7 +16,7 @@ public class UsuarioController: ControllerBase
     }
 
     [Authorize]
-    [HttpGet("RetornaUsuario")]
+    [HttpGet("RetornaUsuario/{login}/{senha}")]
     public async Task<IActionResult> RetornaUsuario([FromRoute] string login, [FromRoute] string senha)
     {
         if (string.IsNullOrEmpty(login) || string.IsNullOrEmpty(senha))
@@ -63,7 +63,7 @@ public class UsuarioController: ControllerBase
         {
             return BadRequest("Acesso invalido.");
         }
-        
+
 
         GenericResponse retorno = await _usuarioBusiness.CriaUsuario(usuario);
         return retorno.Success ? Ok(retorno.Message) : BadRequest(retorno.Message);

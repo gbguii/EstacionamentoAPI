@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace EstacionamentoV2.Business;
 
-public class TokenBusiness: ITokenBusiness
+public class TokenBusiness : ITokenBusiness
 {
     private readonly IUsuarioRepository _usuarioRepository;
     public TokenBusiness(IUsuarioRepository usuarioRepository)
@@ -23,7 +23,7 @@ public class TokenBusiness: ITokenBusiness
         {
             return await GenereteToken(usuario);
         }
-        return new GenericResponse(){ Success = false, Message = "Usuário não encontrado ou inativo."};
+        return new GenericResponse() { Success = false, Message = "Usuário não encontrado ou inativo." };
     }
 
     private async Task<GenericResponse> GenereteToken(UsuarioTokenDTO usuario)
@@ -45,7 +45,7 @@ public class TokenBusiness: ITokenBusiness
         JwtSecurityTokenHandler tokenHandler = new();
         SecurityToken token = tokenHandler.CreateToken(tokenConfig);
         string tokenString = tokenHandler.WriteToken(token);
-        return new GenericResponse(){ Success = true, Message = "Token gerado com sucesso.", Data = tokenString};
+        return new GenericResponse() { Success = true, Message = "Token gerado com sucesso.", Data = tokenString };
     }
 
     private async Task<bool> ValidaUsuario(UsuarioTokenDTO usuarioDTO)
@@ -56,6 +56,7 @@ public class TokenBusiness: ITokenBusiness
 
     private async Task<UsuarioModel> RetornaUsuario(UsuarioTokenDTO usuarioTokenDTO)
     {
-        return await _usuarioRepository.RetornaUsuario(usuarioTokenDTO.Login, usuarioTokenDTO.Senha);
+        string senhaCriptografada = CriptografiaSenhaBusiness.CriptografarSenha(usuarioTokenDTO.Senha);
+        return await _usuarioRepository.RetornaUsuario(usuarioTokenDTO.Login, senhaCriptografada);
     }
 }
