@@ -15,7 +15,8 @@ public class UsuarioBusiness : IUsuarioBusiness
 
     public async Task<GenericResponse> RetornaUsuario(string login, string senha)
     {
-        UsuarioModel usuario = await _usuarioRepository.RetornaUsuario(login, senha);
+        string senhaCriptografada = CriptografiaSenhaBusiness.CriptografarSenha(senha);
+        UsuarioModel usuario = await _usuarioRepository.RetornaUsuario(login, senhaCriptografada);
         if (usuario == null)
         {
             return new GenericResponse { Success = false, Message = "Usuário não encontrado.", Data = null };
@@ -39,11 +40,11 @@ public class UsuarioBusiness : IUsuarioBusiness
         {
             return new GenericResponse { Success = false, Message = "Login já existente.", Data = null };
         }
-
+        string senhaCriptografada = CriptografiaSenhaBusiness.CriptografarSenha(usuario.Senha);
         UsuarioModel usuarioModel = new()
         {
             Login = usuario.Login,
-            Senha = usuario.Senha,
+            Senha = senhaCriptografada,
             Acesso = usuario.Acesso,
             DataCriacao = DateTime.Now,
             DataAlteracao = DateTime.Now,

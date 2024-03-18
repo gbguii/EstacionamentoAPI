@@ -43,15 +43,18 @@ builder.Services.AddTransient<IVeiculoBusiness, VeiculoBusiness>();
 builder.Services.AddTransient<IVeiculoRepository, VeiculoRepository>();
 builder.Services.AddTransient<IRegistroVeiculoBusiness, RegistroVeiculoBusiness>();
 builder.Services.AddTransient<IRegistroVeiculoRepository, RegistroVeiculoRepository>();
+builder.Services.AddTransient<IUsuarioBusiness, UsuarioBusiness>();
 builder.Services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 builder.Services.AddTransient<ITokenBusiness, TokenBusiness>();
 
 var keyS = Encoding.ASCII.GetBytes(Key.Secret);
 
-builder.Services.AddAuthentication(x => {
+builder.Services.AddAuthentication(x =>
+{
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x => {
+}).AddJwtBearer(x =>
+{
     x.RequireHttpsMetadata = false;
     x.SaveToken = true;
     x.TokenValidationParameters = new TokenValidationParameters

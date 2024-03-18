@@ -35,7 +35,7 @@ public class GerarTokenBusinessTest
             Login = "usuario",
             Senha = "senha"
         };
-        _usuarioRepositoryMock.Setup(x => x.RetornaUsuario(usuarioTokenDTO.Login, usuarioTokenDTO.Senha)).ReturnsAsync(_usuario);
+        _usuarioRepositoryMock.Setup(x => x.RetornaUsuario(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(_usuario);
 
         // Act
         GenericResponse retorno = await _gerarTokenBusiness.GerarToken(usuarioTokenDTO);
@@ -54,7 +54,7 @@ public class GerarTokenBusinessTest
             Senha = "senha"
         };
         _usuario.Acesso = "Cliente";
-        _usuarioRepositoryMock.Setup(x => x.RetornaUsuario(usuarioTokenDTO.Login, usuarioTokenDTO.Senha)).ReturnsAsync(_usuario);
+        _usuarioRepositoryMock.Setup(x => x.RetornaUsuario(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(_usuario);
 
         // Act
         GenericResponse retorno = await _gerarTokenBusiness.GerarToken(usuarioTokenDTO);
@@ -73,7 +73,7 @@ public class GerarTokenBusinessTest
             Senha = "senha"
         };
         _usuario.Acesso = "Funcionario";
-        _usuarioRepositoryMock.Setup(x => x.RetornaUsuario(usuarioTokenDTO.Login, usuarioTokenDTO.Senha)).ReturnsAsync(_usuario);
+        _usuarioRepositoryMock.Setup(x => x.RetornaUsuario(It.IsAny<string>(), It.IsAny<string>())).ReturnsAsync(_usuario);
 
         // Act
         GenericResponse retorno = await _gerarTokenBusiness.GerarToken(usuarioTokenDTO);
