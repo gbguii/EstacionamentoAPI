@@ -6,7 +6,7 @@ using EstacionamentoV2.Repository.Interface;
 
 namespace EstacionamentoV2;
 
-public class RegistroVeiculoBusiness: IRegistroVeiculoBusiness
+public class RegistroVeiculoBusiness : IRegistroVeiculoBusiness
 {
     private readonly IRegistroVeiculoRepository _registroRepository;
     private readonly IVeiculoRepository _veiculoRepository;
@@ -20,25 +20,25 @@ public class RegistroVeiculoBusiness: IRegistroVeiculoBusiness
     public async Task<GenericResponse> ConsultarVeiculoEstacionado()
     {
         List<RegistroVeiculoModel> registros = await _registroRepository.ConsultarVeiculosEstacionados();
-        if(registros.Count == 0)
+        if (registros.Count == 0)
         {
-            return new GenericResponse{Success = false,  Message = "Nenhum veículo estacionado"};
+            return new GenericResponse { Success = false, Message = "Nenhum veículo estacionado" };
         }
-        return new GenericResponse{Success = true,  Data = registros};
+        return new GenericResponse { Success = true, Data = registros };
     }
 
     public async Task<GenericResponse> RegistrarEntradaVeiculo(RegistrarEntradaVeiculoDTO veiculo)
     {
-        if(!Validacoes.ValidaPlacaVeiculo(veiculo.Placa))
+        if (!Validacoes.ValidaPlacaVeiculo(veiculo.Placa))
         {
-            return new GenericResponse{Success = false,  Message = "Placa inválida"};
+            return new GenericResponse { Success = false, Message = "Placa inválida" };
         }
-        
+
         PatioModel patio = await _patioRepository.RecuperaPatioPorId(veiculo.PatioId);
 
-        if(patio == null)
+        if (patio == null)
         {
-            return new GenericResponse{Success = false,  Message = "Pátio inválido"};
+            return new GenericResponse { Success = false, Message = "Pátio inválido" };
         }
 
         VeiculoModel veiculoExistente = await _veiculoRepository.BuscaVeiculoPorPlaca(veiculo.Placa);
@@ -51,44 +51,44 @@ public class RegistroVeiculoBusiness: IRegistroVeiculoBusiness
             Mensalista = veiculo.Mensalista,
             DataEntrada = DateTime.Now
         };
-        await _registroRepository.RegistrarEntradaVeiculo (registroVeiculo);
-        return new GenericResponse{Success = true,  Message = "Veículo registrado com sucesso"};
+        await _registroRepository.RegistrarEntradaVeiculo(registroVeiculo);
+        return new GenericResponse { Success = true, Message = "Veículo registrado com sucesso" };
     }
 
     public async Task<GenericResponse> RegistrarSaidaVeiculo(RegistrarSaidaVeiculoDTO veiculo)
     {
-        if(!Validacoes.ValidaPlacaVeiculo(veiculo.Placa))
+        if (!Validacoes.ValidaPlacaVeiculo(veiculo.Placa))
         {
-            return new GenericResponse{Success = false,  Message = "Placa inválida"};
+            return new GenericResponse { Success = false, Message = "Placa inválida" };
         }
 
         RegistroVeiculoModel registroVeiculo = await _registroRepository.ConsultarVeiculoEstacionado(veiculo.Placa);
-        if(registroVeiculo == null)
+        if (registroVeiculo == null)
         {
-            return new GenericResponse{Success = false,  Message = "Veículo não encontrado"};
+            return new GenericResponse { Success = false, Message = "Veículo não encontrado" };
         }
 
-        if(registroVeiculo.DataSaida != null)
+        if (registroVeiculo.DataSaida != null)
         {
-            return new GenericResponse{Success = false,  Message = "Veículo já liberado"};
+            return new GenericResponse { Success = false, Message = "Veículo já liberado" };
         }
 
         registroVeiculo.DataSaida = DateTime.Now;
         int valorAPagar = CalcularValorPagar(registroVeiculo);
         await _registroRepository.RegistrarSaidaVeiculo(registroVeiculo);
 
-        if(registroVeiculo.Mensalista)
+        if (registroVeiculo.Mensalista)
         {
-            return new GenericResponse{Success = true,  Message = "Veículo Mensalista liberado"};
+            return new GenericResponse { Success = true, Message = "Veículo Mensalista liberado" };
         }
-        
-        
-        if(valorAPagar == 0)
+
+
+        if (valorAPagar == 0)
         {
-            return new GenericResponse{Success = true,  Message = "Veículo liberado"};
+            return new GenericResponse { Success = true, Message = "Veículo liberado" };
         }
-        
-        return new GenericResponse{Success = true,  Message = $"Valor a pagar: {valorAPagar}"};
+
+        return new GenericResponse { Success = true, Message = $"Valor a pagar: {valorAPagar}" };
     }
 
     private static int CalcularValorPagar(RegistroVeiculoModel veiculo)
@@ -97,25 +97,25 @@ public class RegistroVeiculoBusiness: IRegistroVeiculoBusiness
         TimeSpan tempoEstacionado = veiculo.DataSaida.Value - veiculo.DataEntrada;
         if (veiculo.Mensalista)
         {
-           valorPagar = 0;
+            valorPagar = 0;
         }
-        else if(tempoEstacionado.TotalMinutes <= 5)
+        else if (tempoEstacionado.TotalMinutes <= 5)
         {
             valorPagar = 0;
         }
-        else if(tempoEstacionado.TotalMinutes <= 30)
+        else if (tempoEstacionado.TotalMinutes <= 30)
         {
             valorPagar = 5;
         }
-        else if(tempoEstacionado.TotalHours <= 1)
+        else if (tempoEstacionado.TotalHours <= 1)
         {
             valorPagar = 10;
         }
-        else if(tempoEstacionado.TotalHours <= 2)
+        else if (tempoEstacionado.TotalHours <= 2)
         {
             valorPagar = 12;
         }
-        else if(tempoEstacionado.TotalHours > 2 && tempoEstacionado.TotalHours <= 6)
+        else if (tempoEstacionado.TotalHours > 2 && tempoEstacionado.TotalHours <= 6)
         {
             valorPagar = 15;
         }
@@ -125,7 +125,7 @@ public class RegistroVeiculoBusiness: IRegistroVeiculoBusiness
         }
         else
         {
-            int TotalHoras = (int) tempoEstacionado.TotalHours - 14;
+            int TotalHoras = (int)tempoEstacionado.TotalHours - 14;
             valorPagar = 18 + (TotalHoras * 2);
         }
         veiculo.ValorPago = valorPagar;

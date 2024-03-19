@@ -24,6 +24,7 @@ var config = new ConfigurationBuilder()
 var conection = config.GetConnectionString("Default");
 builder.Services.AddDbContext<EstacionamentoContext>
     (options => options.UseNpgsql(conection));
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 // Escoped
 builder.Services.AddScoped<PatioBusiness>();

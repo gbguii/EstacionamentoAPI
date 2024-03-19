@@ -28,7 +28,7 @@ public class UsuarioController : ControllerBase
     }
 
     [Authorize]
-    [HttpGet("RetornaUsuarioPorLogin")]
+    [HttpGet("RetornaUsuarioPorLogin/{login}")]
     public async Task<IActionResult> RetornaUsuarioPorLogin([FromRoute] string login)
     {
         if (string.IsNullOrEmpty(login))
