@@ -5,7 +5,7 @@ using EstacionamentoV2.Repository.Interface;
 
 namespace EstacionamentoV2.Business;
 
-public class VeiculoBusiness: IVeiculoBusiness
+public class VeiculoBusiness : IVeiculoBusiness
 {
     private readonly IVeiculoRepository _veiculoRepository;
     public VeiculoBusiness(IVeiculoRepository veiculoRepository)
